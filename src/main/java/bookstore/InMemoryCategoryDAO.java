@@ -1,7 +1,7 @@
 package bookstore;
 
 
-import com.google.common.collect.Lists;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -10,18 +10,19 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 // DAO Data Acces Object
 // DTO Data Transfer Object
-public class InMemoryCategoryDAO {
+public class InMemoryCategoryDAO implements CategorySource{
 
     private static InMemoryCategoryDAO instance;
     private List<Category> categoriesInMemory;
 
     public InMemoryCategoryDAO() {
-        categoriesInMemory = initializeCategories()
+        categoriesInMemory = initializeCategories();
     }
 
     public static InMemoryCategoryDAO getInstance() {
@@ -38,7 +39,11 @@ public class InMemoryCategoryDAO {
     private String filePath = "C:\\SDA\\sda9intermediate\\src\\main\\resources\\kategorie.txt";
 
 
-    public List<Category> initializeCategories() {
+    private List<Category> initializeCategories() {
+        return readDataFromFile();
+    }
+
+    public List<Category> readDataFromFile() {
         List<String> linesFormFile = null;
         try {
             linesFormFile = Files.readAllLines(Paths.get(filePath), Charset.forName("UNICODE"));
@@ -88,6 +93,30 @@ public class InMemoryCategoryDAO {
     private int countSpaces(Category category) {
         return category.getName().startsWith(" ") ?
                 category.getName().split("\\S")[0].length() : 0;
+    }
+
+    @Override
+    public void updateCategory(Category category) {
+        throw new NotImplementedException("Not implemented method");
+    }
+
+    @Override
+    public List<Category> findCategoriesByName(String name) {
+        return categoriesInMemory.stream()
+                .filter(category -> category.getName().equals(name))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Category> getCategories() {
+        return categoriesInMemory;
+    }
+
+    @Override
+    public Optional<Category> findCategoryById(Integer id) {
+        return categoriesInMemory.stream()
+                .filter(c->c.getId().equals(id))
+                .findFirst();
     }
 }
 

@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class InMemoryCategoryDAOTest {
 
+//    private InMemoryCategoryDAO inMemoryCategoryDAO =
+//            Mockito.spy(new InMemoryCategoryDAO);
+
     @Test
-    void shouldReturnListOfCategoriesFromFile(){
+    void shouldReturnListOfCategoriesFromFile() {
         //given
         InMemoryCategoryDAO inMemoryCategoryDAO = new InMemoryCategoryDAO();
         Category cat1;
@@ -22,8 +23,9 @@ class InMemoryCategoryDAOTest {
         String expectedName1 = "Książki";
         String expectedName2 = "Powieści";
         String expectedName3 = "Fantastyka";
+
         //when
-        List<Category> list = inMemoryCategoryDAO.initializeCategories();
+        List<Category> list = inMemoryCategoryDAO.getCategories();
         cat1 = list.stream()
                 .filter(e -> e.getId().equals(1))
                 .findFirst()
@@ -42,6 +44,7 @@ class InMemoryCategoryDAOTest {
                 .get();
         Integer actualValue3 = cat3.getParentId();
         String actualName3 = cat3.getName();
+
         //then
         Assertions.assertEquals(expectedParentId1, actualValue1);
         Assertions.assertEquals(expectedParentId2, actualValue2);
