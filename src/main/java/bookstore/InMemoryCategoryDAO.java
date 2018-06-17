@@ -1,7 +1,5 @@
 package bookstore;
 
-// DAO Data Acces Object
-// DTO Data Transfer Object
 
 import com.google.common.collect.Lists;
 
@@ -15,7 +13,27 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+// DAO Data Acces Object
+// DTO Data Transfer Object
 public class InMemoryCategoryDAO {
+
+    private static InMemoryCategoryDAO instance;
+    private List<Category> categoriesInMemory;
+
+    public InMemoryCategoryDAO() {
+        categoriesInMemory = initializeCategories()
+    }
+
+    public static InMemoryCategoryDAO getInstance() {
+        if (instance == null){// sprawdzamy z uwagi na wydajność
+            synchronized (InMemoryCategoryDAO.class) { //z uwagi na wielowątkowość
+                if (instance == null) {
+                    instance = new InMemoryCategoryDAO();
+                }
+            }
+        }
+        return instance;
+    }
 
     private String filePath = "C:\\SDA\\sda9intermediate\\src\\main\\resources\\kategorie.txt";
 
@@ -71,6 +89,7 @@ public class InMemoryCategoryDAO {
         return category.getName().startsWith(" ") ?
                 category.getName().split("\\S")[0].length() : 0;
     }
-
-
 }
+
+
+
