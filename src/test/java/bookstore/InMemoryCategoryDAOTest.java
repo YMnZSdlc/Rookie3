@@ -19,29 +19,29 @@ class InMemoryCategoryDAOTest {
         Integer expectedParentId1 = null;
         Integer expectedParentId2 = 1;
         Integer expectedParentId3 = 2;
-        String expectedName1 = "Ksiazka";
-        String expectedName2 = "Powiesc";
-        String expectedName3 = "Ksiazka";
+        String expectedName1 = "Książki";
+        String expectedName2 = "Powieści";
+        String expectedName3 = "Fantastyka";
         //when
         List<Category> list = inMemoryCategoryDAO.initializeCategories();
         cat1 = list.stream()
-                .filter(e -> e.equals(1))
+                .filter(e -> e.getId().equals(1))
                 .findFirst()
                 .get();
         Integer actualValue1 = cat1.getParentId();
         String actualName1 = cat1.getName();
         cat2 = list.stream()
-                .filter(e -> e.equals(2))
+                .filter(e -> e.getId().equals(2))
                 .findFirst()
                 .get();
-        Integer actualValue2 = cat1.getParentId();
-        String actualName2 = cat1.getName();
+        Integer actualValue2 = cat2.getParentId();
+        String actualName2 = cat2.getName();
         cat3 = list.stream()
-                .filter(e -> e.equals(3))
+                .filter(e -> e.getId().equals(3))
                 .findFirst()
                 .get();
-        Integer actualValue3 = cat1.getParentId();
-        String actualName3 = cat1.getName();
+        Integer actualValue3 = cat3.getParentId();
+        String actualName3 = cat3.getName();
         //then
         Assertions.assertEquals(expectedParentId1, actualValue1);
         Assertions.assertEquals(expectedParentId2, actualValue2);
