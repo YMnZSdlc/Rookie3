@@ -3,6 +3,7 @@ package bookstore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.junit.platform.commons.util.StringUtils;
 
 @Getter
 @Setter
@@ -17,6 +18,7 @@ public class AdminCategoryDTO
 
     //frontendowcy się uparli i oczekują od nas wartości parent id wystawionej w takiej metodzie, alb # jeśli nie ma parenta
     public String getParent() {
-        return null; //todo
+        //return parentCategoryId == null ? "#" : parentCategoryId.trim(); //todo
+        return StringUtils.isBlank(parentCategoryId) ? "#" : parentCategoryId;
     }
 }

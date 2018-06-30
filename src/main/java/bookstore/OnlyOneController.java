@@ -17,7 +17,8 @@ public class OnlyOneController {
 
     @GetMapping("/cats")
     public String cats(Map<String, Object> model, @RequestParam(required = false) String searchText) {
-        List<AdminCategoryDTO> categoryDtoList = null;//todo - tu trzeba przekazac opracowaną listę
+        SearchCategoriesService searchCategoriesService = new SearchCategoriesService();
+        List<AdminCategoryDTO> categoryDtoList = searchCategoriesService.filterCategories(searchText);//todo - tu trzeba przekazac opracowaną listę
         model.put("catsdata", categoryDtoList);
         return "cats";
     }
