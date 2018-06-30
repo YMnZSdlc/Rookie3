@@ -1,12 +1,16 @@
 package bookstore;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-
-@Getter //dzięki temu nie trzeba robić getter setter
-@Setter //robi to kompilator w trakcie kompilacji
-//tylko coś u mnie nie działa
+// dzieki temu nie musimy pisac kodow
+// getterow i setterow w klasie, robi to
+// kompilator w trakcie kompilacji, dzieki
+// bibliotece Lombok
+@Setter
+@Getter
+@AllArgsConstructor
 public class Category {
     private Integer id;
     private String name;
@@ -15,29 +19,5 @@ public class Category {
     public Category(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
     }
 }

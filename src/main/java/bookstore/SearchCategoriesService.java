@@ -11,10 +11,10 @@ public class SearchCategoriesService {
         return source.getCategories()
                 .stream()
                 .map(category -> buildAdminCategoryDTO(category))
-                .peek(e -> e.setParent(findParent(e)
-                        .map(m -> buildAdminCategoryDTO(m))
-                        .orElse(null)
-                ))
+                .peek(e ->
+                        e.setParentCat(findParent(e)
+                                .map(m -> buildAdminCategoryDTO(m))
+                                .orElse(null)))
                 .peek(e -> {
                     if (e.getText().equals(searchCategoryName)) {
                         e.getState().setSelected(true);
@@ -29,24 +29,26 @@ public class SearchCategoriesService {
         if (child.getParentCategoryId() == null) {
             return Optional.empty();
         }
-        return source.findCategoryById(Integer.valueOf(child.getParentCategoryId()));
+        return source
+                .findCategoryById(Integer
+                        .valueOf(child.getParentCategoryId()));
     }
 
     private AdminCategoryDTO buildAdminCategoryDTO(Category category) {
-        return AdminCategoryDTO.builder().id(category.getId().toString())
-                .parentCategoryId(category.getParentId().toString())
+        return AdminCategoryDTO.builder()
+                .id(category.getId().toString())
+                .parentCategoryId(category.getParentId().toString()) //todo
                 .text(category.getName())
                 .state(new CategoryState())
                 .build();
     }
 
     private void openParents(AdminCategoryDTO child) {
-        AdminCategoryDTO parent = child.getParent();
+        AdminCategoryDTO parent = child.getParentCat();
         if (parent == null) {
             return;
         }
         parent.getState().setOpen(true);
         openParents(parent);
     }
-
 }
