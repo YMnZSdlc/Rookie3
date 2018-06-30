@@ -1,6 +1,5 @@
 package bookstore;
 
-
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.io.IOException;
@@ -14,58 +13,67 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-// DAO Data Acces Object
-// DTO Data Transfer Object
-public class InMemoryCategoryDAO implements CategorySource{
-
+public class InMemoryCategoryDAO implements CategorySource {
+    // DAO Data Access Object
+    // DTO Data Transfer Object
     private static InMemoryCategoryDAO instance;
     private List<Category> categoriesInMemory;
+    private static CategoryDataSource categoryDataSource;
 
-    public InMemoryCategoryDAO() {
+
+    private InMemoryCategoryDAO() {
+        categoriesInMemory = initializeCategories();
+    }
+
+    protected InMemoryCategoryDAO(CategoryDataSource categoryDataSource){
+        this.categoryDataSource = categoryDataSource;
         categoriesInMemory = initializeCategories();
     }
 
     public static InMemoryCategoryDAO getInstance() {
-        if (instance == null){// sprawdzamy z uwagi na wydajność
-            synchronized (InMemoryCategoryDAO.class) { //z uwagi na wielowątkowość
+        // sprawdzamy z uwagi na wydajnosc synchronized
+        if (instance == null) {
+            // z uwagi na wielowątkowość, by na pewno
+            // tylko jeden wątek utworzył instancję
+            synchronized (InMemoryCategoryDAO.class) {
                 if (instance == null) {
-                    instance = new InMemoryCategoryDAO();
+                    CategoryDataSource categoryDataSource = new CategoryDataSource();
+                    instance = new InMemoryCategoryDAO(categoryDataSource);
                 }
             }
         }
         return instance;
     }
 
-    private String filePath = "C:\\SDA\\sda9intermediate\\src\\main\\resources\\kategorie.txt";
-
-
     private List<Category> initializeCategories() {
-        return readDataFromFile();
+        List<String> linesFromFile = readDataFromFile();
+        return populateCategories(linesFromFile);
     }
 
-    public List<Category> readDataFromFile() {
-        List<String> linesFormFile = null;
+    public List<String> readDataFromFile() {
+        List<String> linesFromFile = null;
         try {
-            linesFormFile = Files.readAllLines(Paths.get(filePath), Charset.forName("UNICODE"));
+            linesFromFile = Files.readAllLines(Paths
+                    .get("C:\\projects\\sda9intermediate\\src\\main\\resources\\kategorie.txt"), Charset.forName("UNICODE"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return populateCategories(linesFormFile);
+        return linesFromFile;
     }
 
     private List<Category> populateCategories(List<String> linesFromFile) {
         AtomicInteger idCounter = new AtomicInteger(1);
-
         List<Category> categoryList = linesFromFile.stream()
                 .map(e -> new Category(idCounter.getAndIncrement(), e))
                 .collect(Collectors.toList());
-
         Map<Integer, List<Category>> categoryMap = categoryList.stream()
                 .collect(Collectors.groupingBy(e -> countSpaces(e)));
-
         populateRecursive(0, categoryMap);
-
-        categoryList.forEach(category -> category.setName(category.getName().trim()));
+        categoryList
+                .forEach(category -> category
+                        .setName(category
+                                .getName()
+                                .trim()));
         return categoryList;
     }
 
@@ -78,7 +86,6 @@ public class InMemoryCategoryDAO implements CategorySource{
             if (level == 0) {
                 category.setParentId(null);
             } else {
-//                category.setName(category.getName().trim());
                 Integer parentId = categoryMap.get(level - 1).stream()
                         .map(e -> e.getId())
                         .filter(e -> e < category.getId())
@@ -97,13 +104,14 @@ public class InMemoryCategoryDAO implements CategorySource{
 
     @Override
     public void updateCategory(Category category) {
-        throw new NotImplementedException("Not implemented method");
+        throw new NotImplementedException("Pudlo");
     }
 
     @Override
     public List<Category> findCategoriesByName(String name) {
-        return categoriesInMemory.stream()
-                .filter(category -> category.getName().equals(name))
+        return categoriesInMemory
+                .stream()
+                .filter(category->category.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
@@ -114,11 +122,9 @@ public class InMemoryCategoryDAO implements CategorySource{
 
     @Override
     public Optional<Category> findCategoryById(Integer id) {
-        return categoriesInMemory.stream()
-                .filter(c->c.getId().equals(id))
+        return categoriesInMemory
+                .stream()
+                .filter(category -> category.getId().equals(id))
                 .findFirst();
     }
 }
-
-
-
