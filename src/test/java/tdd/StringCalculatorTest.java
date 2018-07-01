@@ -1,11 +1,14 @@
 package tdd;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorTest {
+
     @Test
     void shouldReturnZeroWhenDataIsEmpty() {
         //given
@@ -14,8 +17,9 @@ class StringCalculatorTest {
         //when
         int actualResult = StringCalculator.adding(data1);
         //then
-        Assertions.assertEquals(expectedResult1,actualResult);
+        Assertions.assertEquals(expectedResult1, actualResult);
     }
+
     @Test
     void shouldReturnZeroWhenDataIsBlank() {
         //given
@@ -24,7 +28,7 @@ class StringCalculatorTest {
         //when
         int actualResult = StringCalculator.adding(data1);
         //then
-        Assertions.assertEquals(expectedResult1,actualResult);
+        Assertions.assertEquals(expectedResult1, actualResult);
     }
 
     @Test
@@ -42,9 +46,9 @@ class StringCalculatorTest {
         int actualResult2 = StringCalculator.adding(data2);
         int actualResult3 = StringCalculator.adding(data3);
         //then
-        Assertions.assertEquals(expectedResult1,actualResult1);
-        Assertions.assertEquals(expectedResult2,actualResult2);
-        Assertions.assertEquals(expectedResult3,actualResult3);
+        Assertions.assertEquals(expectedResult1, actualResult1);
+        Assertions.assertEquals(expectedResult2, actualResult2);
+        Assertions.assertEquals(expectedResult3, actualResult3);
     }
 
     @Test
@@ -52,12 +56,12 @@ class StringCalculatorTest {
         //given
         String data = "a ";
         //when
-        try{
+        try {
             int actualResult = StringCalculator.adding(data);
             fail("Didn't throw exception.");
-        } catch (Exception exception){
-            Assertions.assertEquals(IllegalArgumentException.class,exception.getClass());
-            Assertions.assertNotEquals(NumberFormatException.class,exception.getClass());
+        } catch (Exception exception) {
+            Assertions.assertEquals(IllegalArgumentException.class, exception.getClass());
+            Assertions.assertNotEquals(NumberFormatException.class, exception.getClass());
 
         }
         //then

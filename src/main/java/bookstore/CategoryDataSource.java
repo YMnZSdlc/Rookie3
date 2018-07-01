@@ -13,7 +13,7 @@ public class CategoryDataSource {
         List<String> linesFromFile = null;
         try {
 
-            URI uri = this.getClass().getClassLoader().getResource("kategorie.txt").toURI();
+            URI uri = this.getClass().getClassLoader().getResource("kategorie2.txt").toURI();
             linesFromFile = Files.readAllLines(Paths.get(uri), Charset.forName("UNICODE"));
         } catch (IOException e) {
             e.printStackTrace();
