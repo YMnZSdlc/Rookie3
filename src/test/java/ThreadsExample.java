@@ -18,6 +18,9 @@ import java.util.function.Function;
 
 public class ThreadsExample {
 
+
+    //Poczytać o Eager i lazy w kontekście wielowątkowości
+
     @Test
     void oneByOne() {
         String description = downloadDescription();
