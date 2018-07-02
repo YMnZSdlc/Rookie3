@@ -10,29 +10,48 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserValidationServiceTest {
 
     @Test
-    void shouldPassValidationWithProperUserData(){
-        CustomerRegistrationDTO user1 = createUserWithProperData();
-
+    void shouldPassValidationWithProperUserData() {
+        CustomerRegistrationDTO user = createUserWithProperData();
         UserValidationService userValidationService = new UserValidationService();
-        Map<String,String> errorMap1 =  userValidationService.validateUserData(user1);
-        Assertions.assertTrue(errorMap1.isEmpty());
-
+        Map<String, String> errorsMap = userValidationService.validateUserData(user);
+        Assertions.assertTrue(errorsMap.isEmpty());
     }
 
-    private CustomerRegistrationDTO  createUserWithProperData() {
-        CustomerRegistrationDTO customer1 = new CustomerRegistrationDTO();
-        customer1.setFirstName("Adam");
-        customer1.setLastName("Sztaba");
-        customer1.setZipCode("95-100");
-        customer1.setCity("łódź");
-        customer1.setStreet("Zielona");
-        customer1.setBirthDate("1988-12-23");
-        customer1.setPesel("78212121215");
-        customer1.setEmail("git@sda.pl");
-        customer1.setPassword("abcgdteuajdkjas");
-        customer1.setPhone("654896526");
-        customer1.setPreferEmails(false);
-        return customer1;
+    @Test
+    void shouldNotPassValidationWithWrongBirthDate() {
+        CustomerRegistrationDTO user = createUserWithProperData();
+        user.setBirthDate("12341212");
+        UserValidationService userValidationService = new UserValidationService();
+        Map<String, String> errorsMap = userValidationService.validateUserData(user);
+
+        Assertions.assertTrue(
+                errorsMap.containsKey(UserValidationService.BIRTH_DATA_VAL_RES));
+    }
+    @Test
+    void shouldNotPassValidationWithNullValues() {
+        CustomerRegistrationDTO customer = new CustomerRegistrationDTO();
+        UserValidationService userValidationService = new UserValidationService();
+        Map<String, String> errorsMap = userValidationService.validateUserData(customer);
+
+        Assertions.assertTrue(!errorsMap.isEmpty());
+    }
+
+
+    private CustomerRegistrationDTO createUserWithProperData() {
+        CustomerRegistrationDTO customer = new CustomerRegistrationDTO();
+        customer.setFirstName("Krzysztof");
+        customer.setLastName("Adfsfds");
+        customer.setZipCode("87-123");
+        customer.setCity("łódź");
+        customer.setCountry("Poland");
+        customer.setStreet("Zielona");
+        customer.setBirthDate("1998-10-13");
+        customer.setPesel("78945612321");
+        customer.setEmail("sdafadsgf@wp.pl");
+        customer.setPassword("assdddsfssdfg");
+        customer.setPhone("789456123");
+        customer.setPreferEmails(false);
+        return customer;
     }
 
 }
