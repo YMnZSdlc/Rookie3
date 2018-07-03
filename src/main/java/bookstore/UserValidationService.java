@@ -43,8 +43,7 @@ public class UserValidationService {
         if (org.apache.commons.lang3.StringUtils.isBlank(dto.getStreet())) {
             errorsResult.put(STREET_VAL_RES, "Podanie nazwy ulicy jest wymagane.");
         }
-        if (!dto.getBirthDate().matches("^([1][9][0-9]{2}|[2][0][0-1][0-9])" +
-                "-([0][0-9]|[1][0-2])-([12][0-9]|[0][1-9]|[3][0-1])$")) {
+        if (!dto.getBirthDate().matches("^([1][9]|[2][0])\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12]\\d|[3][012])$")){
             errorsResult.put
                     (BIRTH_DATA_VAL_RES, "Zły format. Data urodzin powinna być podana w formacie RRRR-MM-DD");
         }

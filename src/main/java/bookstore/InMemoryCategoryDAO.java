@@ -19,7 +19,7 @@ public class InMemoryCategoryDAO implements CategorySource {
     // DTO Data Transfer Object
     private static InMemoryCategoryDAO instance;
     private List<Category> categoriesInMemory;
-    private static CategoryDataSource categoryDataSource;
+    private static CategoryDataSource categoryDataSource;// for what?
 
 
     private InMemoryCategoryDAO() {
