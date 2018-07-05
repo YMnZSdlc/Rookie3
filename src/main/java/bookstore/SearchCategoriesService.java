@@ -38,7 +38,7 @@ public class SearchCategoriesService {
         return AdminCategoryDTO.builder()
                 .id(category.getId().toString())
                 .parentCategoryId(category.getParentId() == null
-                        ? null : category.getParentId().toString()) //todo
+                        ? null : category.getParentId().toString())
                 .text(category.getName())
                 .state(new CategoryState())
                 .build();
