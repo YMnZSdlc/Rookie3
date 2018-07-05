@@ -16,7 +16,7 @@ public class User {
     private String birthDate;
     private String pesel;
     private String email;
-    private String password;
+    private String passwordHash;
     private String phone;
     private boolean preferEmails;
 }

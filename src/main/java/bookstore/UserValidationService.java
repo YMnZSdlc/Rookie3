@@ -1,7 +1,7 @@
 package bookstore;
 
 import com.google.common.collect.Maps;
-import org.junit.platform.commons.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
@@ -22,28 +22,28 @@ public class UserValidationService {
     public Map<String, String> validateUserData(CustomerRegistrationDTO dto) {
         Map<String, String> errorsResult = Maps.newHashMap();
 
-        if (StringUtils.isNotBlank(dto.getFirstName()) || dto.getFirstName().length() < 3) {
+        if (StringUtils.isBlank(dto.getFirstName()) || dto.getFirstName().length() < 3) {
             errorsResult.put
                     (FIRST_NAME_VAL_RES, "Imię jest wymagane. Przynajmniej 3 znaki.");
         }
-        if (StringUtils.isNotBlank(dto.getLastName()) || dto.getLastName().length() < 3) {
+        if (StringUtils.defaultIfBlank(dto.getLastName(), "").trim().length()<3){
             errorsResult.put
                     (LAST_NAME_VAL_RES, "Nazwisko jest wymagane. Przynajmniej 3 znaki.");
         }
-        if (StringUtils.isNotBlank(dto.getZipCode()) || !dto.getZipCode().matches("^[0-9]{2}-[0-9]{3}$")) {
+        if (StringUtils.isBlank(dto.getZipCode()) || !dto.getZipCode().matches("^[0-9]{2}-[0-9]{3}$")) {
             errorsResult.put
                     (ZIP_CODE_VAL_RES, "Zły format. Kod pocztowy powinien mieć format 12-345.");
         }
-        if (StringUtils.isNotBlank(dto.getCity()) || StringUtils.isBlank(dto.getCity())) {
+        if (StringUtils.isBlank(dto.getCity()) || StringUtils.isBlank(dto.getCity())) {
             errorsResult.put(CITY_VAL_RES, "Podanie nazwy miasta jest wymagane.");
         }
-        if (org.apache.commons.lang3.StringUtils.isBlank(dto.getCountry())) {
+        if (StringUtils.isBlank(dto.getCountry())) {
             errorsResult.put(COUNTRY_VAL_RES, "Podanie nazwy kraju jest wymagane.");
         }
         if (org.apache.commons.lang3.StringUtils.isBlank(dto.getStreet())) {
             errorsResult.put(STREET_VAL_RES, "Podanie nazwy ulicy jest wymagane.");
         }
-        if (!dto.getBirthDate().matches("^([1][9]|[2][0])\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12]\\d|[3][012])$")){
+        if (!dto.getBirthDate().matches("^([1][9]|[2][0])\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12]\\d|[3][012])$")) {
             errorsResult.put
                     (BIRTH_DATA_VAL_RES, "Zły format. Data urodzin powinna być podana w formacie RRRR-MM-DD");
         }
