@@ -7,8 +7,9 @@ public class UserRegistrationService {
     private void registerUser(CustomerRegistrationDTO customer) {
 
         if (userExistVer1(customer)) {
-            throw new UserExistExeption("User " + customer.getEmail() + " exist");
+            throw new UserExistsException("User " + customer.getEmail() + " exist");
         }
+        //todo nalezy przepisac dane z  CustomerRegistrationDTO na User -> zapisujac hash hasla i potem dodac uzytkownika do listy userow w userdao
 //        UserRegistrationDTOToUserBuilder //todo
 
 

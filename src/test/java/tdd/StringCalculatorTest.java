@@ -62,7 +62,6 @@ class StringCalculatorTest {
         } catch (Exception exception) {
             Assertions.assertEquals(IllegalArgumentException.class, exception.getClass());
             Assertions.assertNotEquals(NumberFormatException.class, exception.getClass());
-
         }
         //then
     }

@@ -23,35 +23,41 @@ public class UserValidationService {
         Map<String, String> errorsResult = Maps.newHashMap();
 
         if (StringUtils.isBlank(dto.getFirstName()) || dto.getFirstName().length() < 3) {
-            errorsResult.put
-                    (FIRST_NAME_VAL_RES, "Imię jest wymagane. Przynajmniej 3 znaki.");
+            errorsResult.put(FIRST_NAME_VAL_RES,
+                    "Imię jest wymagane. Przynajmniej 3 znaki.");
         }
         if (StringUtils.defaultIfBlank(dto.getLastName(), "").trim().length() < 3) {
-            errorsResult.put
-                    (LAST_NAME_VAL_RES, "Nazwisko jest wymagane. Przynajmniej 3 znaki.");
+            errorsResult.put(LAST_NAME_VAL_RES,
+                    "Nazwisko jest wymagane. Przynajmniej 3 znaki.");
         }
         if (StringUtils.isBlank(dto.getZipCode()) || !dto.getZipCode().matches("^[0-9]{2}-[0-9]{3}$")) {
-            errorsResult.put
-                    (ZIP_CODE_VAL_RES, "Zły format. Kod pocztowy powinien mieć format 12-345.");
+            errorsResult.put(ZIP_CODE_VAL_RES,
+                    "Zły format. Kod pocztowy powinien mieć format 12-345.");
         }
         if (StringUtils.isBlank(dto.getCity())) {
-            errorsResult.put(CITY_VAL_RES, "Podanie nazwy miasta jest wymagane.");
+            errorsResult.put(CITY_VAL_RES,
+                    "Podanie nazwy miasta jest wymagane.");
         }
         if (StringUtils.isBlank(dto.getCountry())) {
-            errorsResult.put(COUNTRY_VAL_RES, "Podanie nazwy kraju jest wymagane.");
+            errorsResult.put(COUNTRY_VAL_RES,
+                    "Podanie nazwy kraju jest wymagane.");
         }
         if (StringUtils.isBlank(dto.getStreet())) {
-            errorsResult.put(STREET_VAL_RES, "Podanie nazwy ulicy jest wymagane.");
+            errorsResult.put(STREET_VAL_RES,
+                    "Podanie nazwy ulicy jest wymagane.");
         }
         if (StringUtils.isBlank(dto.getBirthDate()) || !dto.getBirthDate()
                 .matches("^([1][9]|[2][0])\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12]\\d|[3][012])$")) {
-            errorsResult.put(BIRTH_DATA_VAL_RES, "Zły format. Data urodzin powinna być podana w formacie RRRR-MM-DD");
+            errorsResult.put(BIRTH_DATA_VAL_RES,
+                    "Zły format. Data urodzin powinna być podana w formacie RRRR-MM-DD");
         }
         if (StringUtils.isBlank(dto.getPesel()) || !dto.getPesel().matches("^[0-9]{11}")) {
-            errorsResult.put(PESEL_VAL_RES, "Zły format. Numer PESEL powinien składać się z 11 cyfr.");
+            errorsResult.put(PESEL_VAL_RES,
+                    "Zły format. Numer PESEL powinien składać się z 11 cyfr.");
         }
         if (StringUtils.isBlank(dto.getEmail()) || !dto.getEmail().matches("^\\w+@\\w+\\.\\w+")) {
-            errorsResult.put(EMAIL_VAL_RES, "Zły format adresu email");
+            errorsResult.put(EMAIL_VAL_RES,
+                    "Zły format adresu email");
         }
         if (StringUtils.defaultIfBlank(dto.getPassword(), "").trim().length() < 10 ||
                 dto.getPassword().length() > 20) {
@@ -60,7 +66,7 @@ public class UserValidationService {
         }
         if (!StringUtils.defaultIfBlank(dto.getPhone(), "").trim().matches("^\\d{9}$")) {
             errorsResult.put(PHONE_VAL_RES,
-                    "Zły format. Numer telefonu powinien skłądać się z 9 cyfr.");
+                    "Zły format. Numer telefonu powinien składać się z 9 cyfr.");
         }
         return errorsResult;
     }

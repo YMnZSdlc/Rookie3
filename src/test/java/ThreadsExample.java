@@ -18,7 +18,6 @@ import java.util.function.Function;
 
 public class ThreadsExample {
 
-
     //Poczytać o Eager i lazy w kontekście wielowątkowości
 
     @Test
@@ -79,7 +78,6 @@ public class ThreadsExample {
     @Test
     void future() {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
-
         Future<String> futureDescription = executorService.submit(() -> downloadDescription());
         Future<String> futurePhotos = executorService.submit(() -> downloadPhotos());
         Future<BigDecimal> futurePrice = executorService.submit(() -> downloadPrice());
@@ -106,7 +104,7 @@ public class ThreadsExample {
 
         CompletableFuture<String> descrResultCF =
                 descrCF.applyToEitherAsync(descr2CF, e -> {
-                    System.out.println("ściągnoł się " + e);
+                    System.out.println("Pobrał się " + e);
                     return e;
                 }).thenApplyAsync(descriptionFunction);
         CompletableFuture<String> photosResultCF = photoCF.thenApplyAsync(photosFunction);
