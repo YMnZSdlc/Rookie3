@@ -26,10 +26,14 @@ public class UserRegistrationService {
 
     private boolean userExistVer2 (CustomerRegistrationDTO customer){
         return userDAO.getUserList().stream()
-                .map(e->e.getEmail())
+                .map(user->user.getEmail())
                 .filter(email->email.equals(customer.getEmail()))
                 .findAny().isPresent();
     }
 
-
+    private boolean userExistVer3 (CustomerRegistrationDTO customer){
+        return userDAO.getUserList().stream()
+                .map(user->user.getEmail())
+                .anyMatch(email->email.equals(customer.getEmail()));
+    }
 }
