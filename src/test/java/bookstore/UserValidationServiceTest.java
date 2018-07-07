@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserValidationServiceTest {
 
@@ -54,15 +53,28 @@ class UserValidationServiceTest {
         Assertions.assertTrue(errorsMap.isEmpty());
     }
 
+    @Test
+    void shouldNotPassValidationWithBrokenPhone() {
+        //given
+        CustomerRegistrationDTO customer = createUserWithDataWithWhiteSpaces();
+        customer.setPhone("876543jh5");
+        UserValidationService userValidationService = new UserValidationService();
+        //when
+        Map<String, String> errorsMap= userValidationService.validateUserData(customer);
+        //then
+        Assertions.assertTrue(errorsMap.containsKey(UserValidationService.PHONE_VAL_RES));
+    }
 
     private CustomerRegistrationDTO createUserWithProperData() {
         CustomerRegistrationDTO customer = new CustomerRegistrationDTO();
         customer.setFirstName("Krzysztof");
         customer.setLastName("Adfsfds");
-        customer.setZipCode("87-123");
-        customer.setCity("łódź");
-        customer.setCountry("Poland");
-        customer.setStreet("Zielona");
+        customer.setUserAddress(new UserAddress());//tworzenie obiektu klasy UserAddress w obiekcie CustomerRegistrationDTO
+        UserAddress ua = customer.getUserAddress(); //przykład z wyciągniętą zmienną
+        ua.setZipCode("87-123");
+        customer.getUserAddress().setCity("łódź");
+        customer.getUserAddress().setCountry("Poland");
+        customer.getUserAddress().setStreet("Zielona");
         customer.setBirthDate("1998-10-13");
         customer.setPesel("78945612321");
         customer.setEmail("sdafadsgf@wp.pl");
@@ -76,10 +88,11 @@ class UserValidationServiceTest {
         CustomerRegistrationDTO customer = new CustomerRegistrationDTO();
         customer.setFirstName(" Krzysztof ");
         customer.setLastName(" Adfsfds ");
-        customer.setZipCode(" 87-123");
-        customer.setCity(" łódź ");
-        customer.setCountry(" Poland ");
-        customer.setStreet(" Zielona ");
+        customer.setUserAddress(new UserAddress());
+        customer.getUserAddress().setZipCode(" 87-123");
+        customer.getUserAddress().setCity(" łódź ");
+        customer.getUserAddress().setCountry(" Poland ");
+        customer.getUserAddress().setStreet(" Zielona ");
         customer.setBirthDate(" 1998-10-13");
         customer.setPesel(" 78945612321 ");
         customer.setEmail(" sdafadsgf@wp.pl ");

@@ -8,12 +8,9 @@ import lombok.Setter;
 @Setter
 public class CustomerRegistrationDTO {
 
+    private UserAddress userAddress;
     private String firstName;
     private String lastName;
-    private String zipCode;
-    private String city;
-    private String country;
-    private String street;
     private String birthDate;
     private String pesel;
     private String email;

@@ -11,13 +11,11 @@
 <div th:fragment="header">
     <!-- this is header -->
     <div class="topnav">
-        <!--<a href="/cats">Kategorie</a>-->
-        <!--<a href="/register">Rejestracja</a>-->
+        <a href="/cats">Kategorie</a>
+        <a href="/register">Rejestracja</a>
         <!--<a th:if="!${@userContextHolder.getUserLoggedIn()}" href="/login">Login</a>-->
         <!--<a th:if="${@userContextHolder.getUserLoggedIn()}" href="/logout" style="float: right;color: white">Wyloguj</a>-->
         <!--<p th:if="${@userContextHolder.getUserLoggedIn()}" th:text="'Zalogowano jako: '+ ${@userContextHolder.getUserLoggedIn()}" style="float: right;color: white"></p>-->
-
-        <a href="/cats">Kategorie</a>
         <p style="float: right;color: white"></p>
     </div>
 </div>
