@@ -15,7 +15,6 @@ class InMemoryCategoryDAOTest {
 //            Mockito.spy(InMemoryCategoryDAO);
 
 
-
     @Test
     void shouldReturnListOfCategoriesFromFile() {
         // given
@@ -27,11 +26,12 @@ class InMemoryCategoryDAOTest {
         Integer expectedParentId2 = 1;
         Integer expectedParentId3 = 2;
         String expectedNameId1 = "Książki";
-        String expectedNameId2 = "Powieści";
-        String expectedNameId3 = "Fantastyka";
+        String expectedNameId2 = "Atlasy, mapy, przewodniki";
+        String expectedNameId3 = "Atlasy geograficzne i astronomiczne";
 
         // when
         List<Category> list = inMemoryCategoryDAO.getCategories();
+
         cat1 = list.stream()
                 .filter(e -> e.getId().equals(1))
                 .findFirst().get();
@@ -51,18 +51,12 @@ class InMemoryCategoryDAOTest {
         String actualNameId3 = cat3.getName();
 
         // then
-        Assertions.assertEquals(expectedParentId1,
-                actualParentId1);
-        Assertions.assertEquals(expectedParentId2,
-                actualParentId2);
-        Assertions.assertEquals(expectedParentId3,
-                actualParentId3);
+        Assertions.assertEquals(expectedParentId1, actualParentId1);
+        Assertions.assertEquals(expectedParentId2, actualParentId2);
+        Assertions.assertEquals(expectedParentId3, actualParentId3);
 
-        Assertions.assertEquals(expectedNameId1,
-                actualNameId1);
-        Assertions.assertEquals(expectedNameId2,
-                actualNameId2);
-        Assertions.assertEquals(expectedNameId3,
-                actualNameId3);
+        Assertions.assertEquals(expectedNameId1, actualNameId1);
+        Assertions.assertEquals(expectedNameId2, actualNameId2);
+        Assertions.assertEquals(expectedNameId3, actualNameId3);
     }
 }

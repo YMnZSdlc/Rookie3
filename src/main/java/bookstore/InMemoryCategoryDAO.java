@@ -19,14 +19,14 @@ public class InMemoryCategoryDAO implements CategorySource {
     // DTO Data Transfer Object
     private static InMemoryCategoryDAO instance;
     private List<Category> categoriesInMemory;
-    private static CategoryDataSource categoryDataSource;
+    private static CategoryDataSource categoryDataSource;// for what?
 
 
     private InMemoryCategoryDAO() {
         categoriesInMemory = initializeCategories();
     }
 
-    protected InMemoryCategoryDAO(CategoryDataSource categoryDataSource){
+    protected InMemoryCategoryDAO(CategoryDataSource categoryDataSource) {
         this.categoryDataSource = categoryDataSource;
         categoriesInMemory = initializeCategories();
     }
@@ -114,7 +114,7 @@ public class InMemoryCategoryDAO implements CategorySource {
     public List<Category> findCategoriesByName(String name) {
         return categoriesInMemory
                 .stream()
-                .filter(category->category.getName().equals(name))
+                .filter(category -> category.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
