@@ -1,5 +1,7 @@
-package bookstore;
+package bookstore.categories.dtos;
 
+import bookstore.categories.CategoryInfoHolder;
+import bookstore.categories.entities.CategoryState;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

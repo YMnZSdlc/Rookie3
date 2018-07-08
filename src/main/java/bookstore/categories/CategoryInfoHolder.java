@@ -1,4 +1,4 @@
-package bookstore;
+package bookstore.categories;
 
 public interface CategoryInfoHolder {
     void setId(String id);

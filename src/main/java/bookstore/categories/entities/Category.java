@@ -1,4 +1,4 @@
-package bookstore;
+package bookstore.categories.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,16 @@
-package bookstore;
+package bookstore.users.daos;
+
+import bookstore.App;
+import bookstore.users.entities.User;
+import com.google.common.collect.Lists;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+@Service //tworzy zabezpieczony SINGLETON z if'ami itd..
 public class UserDAO {
     private List<User> userList = initializeFromFile();
 
@@ -30,17 +37,21 @@ public class UserDAO {
     }
 
     private List<User> initializeFromFile() {
-        String usersDataPath = this.getClass()
-                .getClassLoader().getResource("usersData").getFile();
-        try (FileInputStream fileInputStream = new FileInputStream(usersDataPath);
-             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+        try {
+            String usersDataPath = this.getClass()
+                    .getClassLoader().getResource("usersData").getFile();
+            try (FileInputStream fileInputStream = new FileInputStream(usersDataPath);
+                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
 
-            return (List<User>) objectInputStream.readObject();
+                return (List<User>) objectInputStream.readObject();
 
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            return Lists.newArrayList();
+        } catch (Exception e) {
+            return Lists.newArrayList();
         }
-        return Arrays.asList();
     }
 
 

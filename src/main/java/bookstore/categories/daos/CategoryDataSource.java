@@ -1,4 +1,4 @@
-package bookstore;
+package bookstore.categories.daos;
 
 import java.io.IOException;
 import java.net.URI;
