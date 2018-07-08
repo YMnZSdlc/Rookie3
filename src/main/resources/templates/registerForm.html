@@ -18,8 +18,8 @@
 
     <label for="surname">Nazwisko:</label>
 
-    <input id="surname" type="text" th:field="${form.secondName}"  autofocus class="form-control"/>
-    <p class="error" th:text="${secondNameValRes}"/>
+    <input id="surname" type="text" th:field="${form.lastName}"  autofocus class="form-control"/>
+    <p class="error" th:text="${lastNameValRes}"/>
 
     <label for="zipcode">Kod pocztowy:</label>
 
@@ -43,8 +43,8 @@
     <p class="error" th:text="${streetValRes}"/>
 
     <label for="birth">Data urodzenia:</label>
-    <input id="birth" type="text" placeholder="yyyy-mm-dd" th:field="${form.birthdate}"  autofocus class="form-control"/>
-    <p class="error" th:text="${birthdateValRes}"/>
+    <input id="birth" type="text" placeholder="yyyy-mm-dd" th:field="${form.birthDate}"  autofocus class="form-control"/>
+    <p class="error" th:text="${birthDateValRes}"/>
 
     <label for="inputPesel"> PESEL:</label>
     <input id="inputPesel" type="text"  autofocus class="form-control" th:field="${form.pesel}"/>

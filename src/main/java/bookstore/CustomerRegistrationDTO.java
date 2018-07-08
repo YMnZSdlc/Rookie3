@@ -17,6 +17,4 @@ public class CustomerRegistrationDTO {
     private String password;
     private String phone;
     private boolean preferEmails;
-
-
 }

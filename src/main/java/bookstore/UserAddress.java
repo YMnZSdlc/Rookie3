@@ -4,9 +4,11 @@ package bookstore;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class UserAddress {
+public class UserAddress implements Serializable{
     private String street;
     private String city;
     private String country;
