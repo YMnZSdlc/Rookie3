@@ -64,7 +64,7 @@ public class UserValidationService {
             errorsResult.put(PESEL_VAL_RES,
                     "Zły format. Numer PESEL powinien składać się z 11 cyfr.");
         }
-        if (StringUtils.isBlank(dto.getEmail()) || !dto.getEmail().trim().matches("^\\w+@\\.\\w+\\w+\\.\\w+\\.\\w+$")) {
+        if (StringUtils.isBlank(dto.getEmail()) || !dto.getEmail().trim().matches("^(\\w+|\\w+\\.w+)@(\\w+|\\w+\\.w+).\\w+$")) {
             errorsResult.put(EMAIL_VAL_RES,
                     "Zły format adresu email");
         }

@@ -6,12 +6,15 @@ import bookstore.users.exception.UserNotExistsExeception;
 import bookstore.users.dtos.CustomerLoginDTO;
 import bookstore.users.entities.User;
 import org.apache.commons.codec.digest.DigestUtils;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.function.Supplier;
 
+@Service //tworzy zabezpieczony SINGLETON z if'ami itd..
 public class UserLoginService {
 
-    private UserDAO userDAO = new UserDAO(); //FIXME
+    @Autowired
+    private UserDAO userDAO;
 
     public void login(CustomerLoginDTO customerLoginDTO) {
         Supplier<UserNotExistsExeception> exceptionSupplier = () -> new UserNotExistsExeception("Użytkownik nie istnieje");
