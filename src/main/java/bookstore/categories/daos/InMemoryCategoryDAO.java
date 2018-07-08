@@ -1,5 +1,6 @@
-package bookstore;
+package bookstore.categories.daos;
 
+import bookstore.categories.entities.Category;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.io.IOException;

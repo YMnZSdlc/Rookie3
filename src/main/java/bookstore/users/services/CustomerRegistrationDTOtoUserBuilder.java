@@ -1,5 +1,7 @@
-package bookstore;
+package bookstore.users.services;
 
+import bookstore.users.dtos.CustomerRegistrationDTO;
+import bookstore.users.entities.User;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class CustomerRegistrationDTOtoUserBuilder {

@@ -1,11 +1,4 @@
-package tdd;
-
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-
-
-import static org.junit.jupiter.api.Assertions.*;
+package example;
 
 class StringCalculatorTest {
 

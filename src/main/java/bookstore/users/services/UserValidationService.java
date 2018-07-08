@@ -1,9 +1,9 @@
-package bookstore;
+package bookstore.users.services;
 
+import bookstore.users.dtos.CustomerRegistrationDTO;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class UserValidationService {
@@ -64,7 +64,7 @@ public class UserValidationService {
             errorsResult.put(PESEL_VAL_RES,
                     "Zły format. Numer PESEL powinien składać się z 11 cyfr.");
         }
-        if (StringUtils.isBlank(dto.getEmail()) || !dto.getEmail().trim().matches("^\\w+@\\w+\\.\\w+")) {
+        if (StringUtils.isBlank(dto.getEmail()) || !dto.getEmail().trim().matches("^\\w+@\\.\\w+\\w+\\.\\w+\\.\\w+$")) {
             errorsResult.put(EMAIL_VAL_RES,
                     "Zły format adresu email");
         }

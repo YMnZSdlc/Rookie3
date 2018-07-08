@@ -1,4 +1,4 @@
-package bookstore;
+package example;
 
 public class StackTraceExample {
     public static void main(String[] args) {

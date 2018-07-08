@@ -1,6 +1,5 @@
-import bookstore.AdminCategoryDTO;
-import bookstore.Category;
-import net.bytebuddy.implementation.bind.annotation.Super;
+import bookstore.categories.dtos.AdminCategoryDTO;
+import bookstore.categories.entities.Category;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;

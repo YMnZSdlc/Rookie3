@@ -1,4 +1,4 @@
-package bookstore;
+package bookstore.users.entities;
 
 
 import lombok.Getter;

@@ -1,5 +1,11 @@
 package bookstore;
 
+import bookstore.categories.dtos.AdminCategoryDTO;
+import bookstore.categories.services.SearchCategoriesService;
+import bookstore.users.dtos.CustomerRegistrationDTO;
+import bookstore.users.exception.UserExistsException;
+import bookstore.users.services.UserRegistrationService;
+import bookstore.users.services.UserValidationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

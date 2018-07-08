@@ -1,4 +1,4 @@
-package tdd;
+package example;
 
 import org.junit.platform.commons.util.StringUtils;
 

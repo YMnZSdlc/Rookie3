@@ -1,4 +1,4 @@
-package tdd;
+package example;
 
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -6,9 +6,7 @@ import lombok.ToString;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;

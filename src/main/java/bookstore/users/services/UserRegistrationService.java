@@ -1,4 +1,9 @@
-package bookstore;
+package bookstore.users.services;
+
+import bookstore.users.daos.UserDAO;
+import bookstore.users.exception.UserExistsException;
+import bookstore.users.dtos.CustomerRegistrationDTO;
+import bookstore.users.entities.User;
 
 public class UserRegistrationService {
     private UserValidationService userValidationService = new UserValidationService();
