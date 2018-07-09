@@ -1,3 +1,5 @@
+package example;
+
 import bookstore.categories.dtos.AdminCategoryDTO;
 import bookstore.categories.entities.Category;
 import org.assertj.core.util.Lists;

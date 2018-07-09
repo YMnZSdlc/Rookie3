@@ -9,6 +9,7 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service //tworzy zabezpieczony SINGLETON z if'ami itd..
 public class UserDAO {
@@ -55,4 +56,9 @@ public class UserDAO {
     }
 
 
+    public Optional <User> getUserByEmail(String email) {
+        return userList.stream()
+                .filter(w->w.getEmail().equalsIgnoreCase(email))
+                .findFirst();
+    }
 }
