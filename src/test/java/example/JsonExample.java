@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 
 public class JsonExample {
 
@@ -30,11 +31,10 @@ public class JsonExample {
             bufferedReader.close();
 
             RatesWrapper[] ratesWrappers = new Gson().fromJson(result, RatesWrapper[].class);
-            System.out.println();
+            System.out.println(Arrays.toString(ratesWrappers));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 

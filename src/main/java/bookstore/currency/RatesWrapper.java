@@ -1,13 +1,17 @@
 package bookstore.currency;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.List;
 
-public class RatesWrapper {
-
+@Getter
+@Setter
+@ToString
+public class RatesWrapper<T extends Rate> {
     private String table;
     private String no;
     private String effectiveDate;
-    private List<Rate> rates;
-
-
+    private List<T> rates;
 }
