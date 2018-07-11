@@ -13,19 +13,19 @@ public class RatesFromXmlWrapper extends RatesWrapper<RateFromXml> {
     }
 
     @Override
-    @JsonProperty
+    @JsonProperty("No")
     public void setNo(String no) {
         super.setNo(no);
     }
 
     @Override
-    @JsonProperty
+    @JsonProperty("EffectiveDate")
     public void setEffectiveDate(String effectiveDate) {
         super.setEffectiveDate(effectiveDate);
     }
 
     @Override
-    @JsonProperty
+    @JsonProperty("Rates")
     public void setRates(List<RateFromXml> rates) {
         super.setRates(rates);
     }
