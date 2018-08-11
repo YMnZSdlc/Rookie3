@@ -95,8 +95,8 @@ public class LambdasExample {
 
     @Test
     void compareTest (){
-        Category category1 = new Category(1,"1223");
-        Category category2 = new Category(1,"223");
+        Category category1 = new Category("1223");
+        Category category2 = new Category("223");
         List<Category> categories = Lists.newArrayList(category1, category2);
 
 

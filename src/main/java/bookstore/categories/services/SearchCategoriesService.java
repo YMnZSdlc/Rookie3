@@ -4,14 +4,20 @@ import bookstore.categories.dtos.AdminCategoryDTO;
 import bookstore.categories.daos.CategorySource;
 import bookstore.categories.daos.InMemoryCategoryDAO;
 import bookstore.categories.entities.Category;
+import bookstore.categories.entities.CategoryRepository;
 import bookstore.categories.entities.CategoryState;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service //singleton
 public class SearchCategoriesService {
-    CategorySource source = InMemoryCategoryDAO.getInstance();
+
+    @Autowired //umożliwia użycie danego obiektu - singleton
+    private CategoryRepository source;
 
     public List<AdminCategoryDTO> filterCategories(String searchCategoryName) {
         return source.getCategories()
