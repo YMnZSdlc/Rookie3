@@ -8,7 +8,9 @@ import bookstore.users.exception.UserExistsException;
 import bookstore.users.services.UserLoginService;
 import bookstore.users.services.UserRegistrationService;
 import bookstore.users.services.UserValidationService;
+import bookstore.weather.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +24,24 @@ public class OnlyOneController {
     @Autowired
     private UserLoginService userLoginService;
 
+    @Autowired
+    private WeatherService weatherService;
+
     private final UserRegistrationService userRegistrationService = new UserRegistrationService();
 
     @RequestMapping("/")
     public String welcome(Map<String, Object> model) {
         return "index";
+    }
+
+    @GetMapping("/weather")
+    @ResponseBody
+    public ResponseEntity<String> weather(Map<String, Object> model) {
+        try {
+            return ResponseEntity.ok(weatherService.getWeather());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Błąd");
+        }
     }
 
     @GetMapping("/cats")
@@ -48,7 +63,6 @@ public class OnlyOneController {
         userLoginService.login(loginDto);
         return "index";
     }
-
 
     @RequestMapping(value = "/register", method = RequestMethod.GET) //wyswietlanie pustego formularza
     public String registerForm(Map<String, Object> model) {
