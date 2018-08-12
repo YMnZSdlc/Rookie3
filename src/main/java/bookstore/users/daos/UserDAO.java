@@ -3,6 +3,7 @@ package bookstore.users.daos;
 import bookstore.App;
 import bookstore.users.entities.User;
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -13,15 +14,23 @@ import java.util.Optional;
 
 @Service //tworzy zabezpieczony SINGLETON z if'ami itd..
 public class UserDAO {
-    private List<User> userList = initializeFromFile();
+
+    // @Service @Conroler @Repository tego szuka spring po uruchomieniu aplikacji
+    // i tworzy singletony obiektów wskazanych adnotacjami
+
+    @Autowired //dzięki tej adnotacji spring tworzy referencje do UserRepository
+    private UserRepository userRepository;
+
+   // private List<User> userList = initializeFromFile();
+
+
 
     public List<User> getUserList() {
-        return userList;
+        return userRepository.findAll();
     }
 
     public void addUser(User user) {
-        userList.add(user);
-        serializeToFile(userList);
+        userRepository.save(user);
     }
 
     private void serializeToFile(List<User> userList) {
@@ -53,8 +62,11 @@ public class UserDAO {
     }
 
     public Optional<User> getUserByEmail(String email) {
-        return userList.stream()
-                .filter(w -> w.getEmail().equalsIgnoreCase(email))
-                .findFirst();
+        return userRepository.findAllByEmail(email)
+                .stream().findFirst();
+
+//        return userList.stream()
+//                .filter(w -> w.getEmail().equalsIgnoreCase(email))
+//                .findFirst();
     }
 }

@@ -31,9 +31,10 @@ public class OnlyOneController {
     @Autowired
     private SearchCategoriesService searchCategoriesService;
 
-    private final UserRegistrationService userRegistrationService = new UserRegistrationService();
 
-
+    @Autowired
+    private UserRegistrationService userRegistrationService;
+    
     @RequestMapping("/")
     public String welcome(Map<String, Object> model) {
         return "index";

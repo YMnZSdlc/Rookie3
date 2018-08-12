@@ -4,9 +4,15 @@ import bookstore.users.daos.UserDAO;
 import bookstore.users.exception.UserExistsException;
 import bookstore.users.dtos.CustomerRegistrationDTO;
 import bookstore.users.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class UserRegistrationService {
-    private UserValidationService userValidationService = new UserValidationService();
+//    private UserValidationService userValidationService = new UserValidationService();
+
+    @Autowired
     private UserDAO userDAO = new UserDAO();
 
     public void registerUser(CustomerRegistrationDTO registrationDTO) {
