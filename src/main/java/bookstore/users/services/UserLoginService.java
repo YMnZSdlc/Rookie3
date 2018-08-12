@@ -18,6 +18,7 @@ public class UserLoginService {
 
     public void login(CustomerLoginDTO customerLoginDTO) {
         Supplier<UserNotExistsExeception> exceptionSupplier = () -> new UserNotExistsExeception("Użytkownik nie istnieje");
+
         User user = userDAO.getUserList() // Sprawdzenie czy user istnieje
                 .stream()
                 .filter(u -> u.getEmail().equalsIgnoreCase(customerLoginDTO.getLogin().trim()))

@@ -21,13 +21,18 @@ import java.util.Map;
 @Controller //singleton
 public class OnlyOneController {
 
-    @Autowired
+    //DEPENDENCY INJECTION - Spring umożliwi nam użycie tej klasy, która jest singletonem
+    @Autowired  //Działa tylko dla klas oznaczonych jako @Service/@Component/@Controller/@RestController itd
     private UserLoginService userLoginService;
 
     @Autowired
     private WeatherService weatherService;
 
+    @Autowired
+    private SearchCategoriesService searchCategoriesService;
+
     private final UserRegistrationService userRegistrationService = new UserRegistrationService();
+
 
     @RequestMapping("/")
     public String welcome(Map<String, Object> model) {
@@ -46,13 +51,12 @@ public class OnlyOneController {
 
     @GetMapping("/cats")
     public String cats(Map<String, Object> model, @RequestParam(required = false) String searchText) {
-        SearchCategoriesService searchCategoriesService = new SearchCategoriesService();
         List<AdminCategoryDTO> categoryDtoList = searchCategoriesService.filterCategories(searchText);
         model.put("catsdata", categoryDtoList);
         return "cats";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET) //wyswietlanie pustego formularza logowania
+    @RequestMapping(value = "/login", method = RequestMethod.GET) //wyświetlanie pustego formularza logowania
     public String loginForm(Map<String, Object> model) {
         model.put("form", new CustomerLoginDTO());
         return "loginForm";
@@ -64,11 +68,11 @@ public class OnlyOneController {
         return "index";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET) //wyswietlanie pustego formularza
+    @RequestMapping(value = "/register", method = RequestMethod.GET) //wyświetlanie pustego formularza
     public String registerForm(Map<String, Object> model) {
         model.put("form", new CustomerRegistrationDTO()); //pusty CustomerRegistrationDTO do przechowywania danych z formularza rejestracji
         // dodatkowo z CustomerRegistrationDto wyciagnijcie pola [street, city, country, zipCode
-        // do osbnej klasy UserAddress tak by sie wszystko kompilowalo i przechodzily testy - nalezy je poprawic po zmianie
+        // do osbnej klasy UserAddress tak by sie wszystko kompilowalo i przechodziły testy - nalezy je poprawic po zmianie
         model.put("countries", Arrays.asList(Countries.values())); //kolekcja krajów - enum Countries (POLSKA,NIEMCY,ROSJA) z polami symbol plName
 
         return "registerForm";

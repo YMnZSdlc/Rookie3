@@ -68,7 +68,8 @@ public class InMemoryCategoryDAO implements CategorySource {
     private List<Category> populateCategories(List<String> linesFromFile) {
         AtomicInteger idCounter = new AtomicInteger(1);
         List<Category> categoryList = linesFromFile.stream()
-                .map(e -> new Category(idCounter.getAndIncrement(), e))
+                .map(e -> new Category(e))
+                .peek(e->e.setId(idCounter.getAndIncrement()))
                 .collect(Collectors.toList());
         Map<Integer, List<Category>> categoryMap = categoryList.stream()
                 .collect(Collectors.groupingBy(e -> countSpaces(e)));

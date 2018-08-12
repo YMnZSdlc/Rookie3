@@ -9,13 +9,33 @@
     <div class="container">
 
         <footer>
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
             <script type="text/javascript"
                     src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         </footer>
     </div>
-
+    <script>
+        var openweathermap = $("#openweathermap-widget");
+        $.getJSON("/weather")
+            .success(
+                function (response) {
+                    console.log(response.data)
+                    openweathermap.find(".weather-right-card__temperature-min").text((response.main.temp_min) + '°C')
+                    openweathermap.find(".weather-right-card__temperature-max").text((response.main.temp_max) + '°C')
+                    openweathermap.find(".widget-right__description").text((response.weather[0].description))
+                    $("#weather-image").attr('src', '//openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/' + response.weather[0].icon + '.png')
+                    openweathermap.find(".widget-right__title").text((response.name) + ', ' + response.sys.country)
+                }
+            )
+            .error(function (response) {
+                    console.log(response.responseText)
+                    $("#weather-image").attr('src', 'https://a.allegroimg.com/s128/03f74b/6779d2084e54a7d7bf41712cb53a')
+                    openweathermap.find(".widget-right__description").text((response.responseText))
+                }
+            )
+    </script>
 </div>
 </body>
 </html>
