@@ -34,7 +34,7 @@ public class OnlyOneController {
 
     @Autowired
     private UserRegistrationService userRegistrationService;
-    
+
     @RequestMapping("/")
     public String welcome(Map<String, Object> model) {
         return "index";
